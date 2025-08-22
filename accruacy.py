@@ -10,7 +10,6 @@ class Accuracy(commands.Cog):
         self.url = "https://accuratelinuxgraphs.com/api/graphs/random"  # The url to get our data (you could edit this for something else but you'd have to change data points too)
 
     @commands.hybrid_command(name="accuracy", aliases=["a"], description="Get a Random Accurate Graph")
-    @commands.guild_only()
     async def accuracy(self, ctx: commands.Context[Tux]) -> None:
         async with aiohttp.ClientSession() as session, session.get(self.url) as resp:
             if resp.status == 200:
