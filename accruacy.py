@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 import aiohttp
 from discord.ext import commands
 
@@ -14,7 +16,8 @@ class Accuracy(commands.Cog):
         async with aiohttp.ClientSession() as session, session.get(self.url) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                graph_url = f"https://accuratelinuxgraphs.com{data['graphImgUrl']}"
+                imgpath = quote(data["graphImgUrl"])
+                graph_url = f"https://accuratelinuxgraphs.com{imgpath}"
                 await ctx.send(content=f"{data['caption']}\n{graph_url}")
             else:
                 await ctx.send("Could not fetch graph data.")
